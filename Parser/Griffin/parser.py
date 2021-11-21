@@ -59,6 +59,7 @@ def get_tokens(index):
 
 def decode_token(current_token):
     encoded_token = get_tokens(current_token)
+    print(encoded_token)
     token = token_identity[encoded_token]
 
     return token
@@ -292,12 +293,10 @@ def statement(current_token):
 
                 if token == "EOL":
                     print("token ", token, " number ", current_token, " parsed successfully in begin procedure (statement)")
-                    print("wtf is going on")
                     current_token += 1
                     token = decode_token(current_token)
 
                 print(token, " $ ", current_token)
-                print(decode_token(current_token+1), current_token+1)
 
                 if token == "ident" or token == "call" or token == "if" or token == "while" or token == "begin":
                     print("token ", token, " number ", current_token, " parsed successfully in begin procedure (statement)")
