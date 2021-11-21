@@ -23,23 +23,23 @@ tokens = {                                                      #   token table 
 
 token_identity = {
     "0": "ident",
-    "1": "number",
-    "2": "program",   "18": "while",    "34":"EOL",
-    "3": "begin",     "19": "loop",     "35":"EOF",
-    "4": "end",       "20": "end_loop", "36":"var",
-    "5": ";",         "21": "input",    "37":"const",
-    "6": "declare",   "22": "output",   "38":"call",
-    "7": ",",         "23":"+",         "39":"procedure",
-    "8": ":=",        "24":"-",         "40":"<>",
-    "9": ".",         "25": "*",        "41":"<",
-    "10":"if",        "26": "/",        "42":">",
-    "11": "then",     "27": "(",        "43":">=",
-    "12": "else",     "28": ")",        "44":"<=",
-    "13": "end_if",   "29":"do",
-    "14": "odd",      "30":"Real",
-    "15": ":",        "31":"Integer",
-    "16": "{",        "32":"Boolean",
-    "17": "}",        "33":"=",
+    "1": "number",      
+    "2": "program",   "18": "while",        "34": "EOL",
+    "3": "begin",     "19": "loop",         "35": "EOF",
+    "4": "end",       "20": "end_loop",     "36": "var",
+    "5": ";",         "21": "input",        "37": "const",
+    "6": "declare",   "22": "output",       "38": "call",
+    "7": ",",         "23": "+",            "39": "procedure",
+    "8": ":=",        "24": "-",            "40": "<>",
+    "9": ".",         "25": "*",            "41": "<",
+    "10":"if",        "26": "/",            "42": ">",
+    "11": "then",     "27": "(",            "43": ">=",
+    "12": "else",     "28": ")",            "44": "<=",
+    "13": "end_if",   "29": "do",
+    "14": "odd",      "30": "Real",
+    "15": ":",        "31": "Integer",
+    "16": "{",        "32": "Boolean",
+    "17": "}",        "33": "=",
 }
 
 def get_tokens(index):
@@ -292,16 +292,19 @@ def statement(current_token):
 
                 if token == "EOL":
                     print("token ", token, " number ", current_token, " parsed successfully in begin procedure (statement)")
+                    print("wtf is going on")
                     current_token += 1
                     token = decode_token(current_token)
 
-                print(token, " ", current_token)
+                print(token, " $ ", current_token)
+                print(decode_token(current_token+1), current_token+1)
+
                 if token == "ident" or token == "call" or token == "if" or token == "while" or token == "begin":
                     print("token ", token, " number ", current_token, " parsed successfully in begin procedure (statement)")
                     current_token = begin(current_token)
                     token = decode_token(current_token)
                 else:
-                    print("Error: recieved ", token, " expected ident, call, if, while, or begin ", " on token ", current_token)
+                    print("$Error: recieved ", token, " expected ident, call, if, while, or begin ", " on token ", current_token)
                     exit()
         else:
             print("Error: recieved ", token, " expected ; or end ", " on token ", current_token)
@@ -356,7 +359,7 @@ def statement(current_token):
                 exit()
             else:
                 print("token ", token, " number ", current_token, " parsed successfully in statement block")
-                #current_token = statement(current_token)
+                current_token = statement(current_token)
 
         return current_token
 
@@ -532,7 +535,7 @@ def term(current_token):
         token = decode_token(current_token)
 
     if token == "*" or token == "/":
-        current_token = factor(token)
+        current_token = factor(current_token)
         token = decode_token(current_token)
 
     return current_token
@@ -580,8 +583,9 @@ def factor(current_token):
     return current_token
 
 def main():
+    print(lex())
     print_line(1)
-    #program()
+    program()
 
 if __name__ == "__main__":
     main()
