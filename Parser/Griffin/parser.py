@@ -61,7 +61,9 @@ def get_tokens(index):
     return token_list[index]
 
 def recover(current_token):
-    encoded_token = get_tokens(current_token)
+    print("ERROR: == R = E = C = O = V = E = R = I = N = G ==================")
+    print("Error on token #", current_token, ": ", decode_token(current_token))
+    encoded_token = get_tokens(current_token + 1)
     token = token_identity[encoded_token]
 
     if token == "const" or token == "var" or token == "procedure":
