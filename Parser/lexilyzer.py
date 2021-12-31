@@ -112,7 +112,7 @@ def hasher(identifier="test", factor="pPrime", modulo=499):     ##  hasher funct
     return(hashCode%modulo)                                     #   return the sum of those values modulo the symbol table size
 
 
-def openFile(filepath="test.pl0"):                              ##  opens passed filename/filepath and returns it as a string
+def openFile(filepath="test.pl0"):               ##  opens passed filename/filepath and returns it as a string
     with open(filepath, 'r') as f:
         programString = f.read()
     return(programString)
